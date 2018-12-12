@@ -17,6 +17,9 @@ for command in commands:
 initialState = "###....#..#..#......####.#..##..#..###......##.##..#...#.##.###.##.###.....#.###..#.#.##.#..#.#"
 zeroID = 0
 state = initialState
+lastTotal = -456265
+lastDifference = -52
+sameDiffCount = 0
 for p in range(500000000):
     zeroID += 2
     state = ".." + state + ".."
@@ -35,16 +38,23 @@ for p in range(500000000):
         #print(i, state)
         newState += transforms[key]
     state = newState
-    if state.count("#") == 34:
-        total = 0
-        for i in range(len(state)):
-            val = i - zeroID
-            if state[i] == "#": total += val
-        print(p, total)
-        input()
+    total = 0
+    for i in range(len(state)):
+        val = i - zeroID
+        if state[i] == "#": total += val
+    if total - lastTotal == lastDifference:
+        sameDiffCount += 1
+        if sameDiffCount > 10:
+            diff = total - lastTotal
+            print(diff)
+            step = p + 1
+            print(step)
+            offset = total - step * diff
+            print(offset)
+            finalVal = diff*50000000000 + offset
+            break
+    else:
+        lastDifference = total - lastTotal
+        lastTotal = total
 
-total = 0
-for i in range(len(state)):
-    val = i - zeroID
-    if state[i] == "#": total += val
-print(total)
+print(finalVal)
