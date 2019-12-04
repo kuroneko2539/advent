@@ -1,4 +1,4 @@
-input_data = [x.strip() for x in open("./day4input.txt", "r").readlines()]
+input_data = [x.strip() for x in open("./day4Input.txt", "r").readlines()]
 part = 2
 minR = int(input_data[0].split("-")[0])
 maxR = int(input_data[0].split("-")[1])
