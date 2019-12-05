@@ -34,7 +34,7 @@ def executeCommand(buffer, command, position):
             b = buffer[position+2]
         buffer[buffer[position+3]] = a + b
         position = position + 4
-    if command[0] == 2:
+    elif command[0] == 2:
         if command[1] == 0:
             a = buffer[buffer[position+1]]
         else:
@@ -45,16 +45,16 @@ def executeCommand(buffer, command, position):
             b = buffer[position+2]
         buffer[buffer[position+3]] = a * b
         position = position + 4      
-    if command[0] == 3:
+    elif command[0] == 3:
         buffer[buffer[position+1]] = inVal
         position = position + 2
-    if command[0] == 4:
+    elif command[0] == 4:
         if command[1] == 0:
             outputsList.append(buffer[buffer[position+1]])
         else:
             outputsList.append(buffer[position+1])
         position = position + 2
-    if command[0] == 5:
+    elif command[0] == 5:
         if command[1] == 0:
             a = buffer[buffer[position+1]]
         else:
@@ -67,7 +67,7 @@ def executeCommand(buffer, command, position):
             position = b
         else:
             position = position + 3
-    if command[0] == 6:
+    elif command[0] == 6:
         if command[1] == 0:
             a = buffer[buffer[position+1]]
         else:
@@ -80,7 +80,7 @@ def executeCommand(buffer, command, position):
             position = b
         else:
             position = position + 3
-    if command[0] == 7:
+    elif command[0] == 7:
         if command[1] == 0:
             a = buffer[buffer[position+1]]
         else:
@@ -94,7 +94,7 @@ def executeCommand(buffer, command, position):
         else:
             buffer[buffer[position+3]] = 0
         position = position + 4
-    if command[0] == 8:
+    elif command[0] == 8:
         if command[1] == 0:
             a = buffer[buffer[position+1]]
         else:
@@ -108,7 +108,7 @@ def executeCommand(buffer, command, position):
         else:
             buffer[buffer[position+3]] = 0
         position = position + 4
-    if command[0] == 99:
+    else:
         return buffer, None
     return buffer, position
 
