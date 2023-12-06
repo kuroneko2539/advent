@@ -32,6 +32,7 @@ number_mapping = {
 with open("day1.txt", "r") as file:
     for line in file:
         digits = re.findall(r"\d+|zero|one|two|three|four|five|six|seven|eight|nine", line)
+        if len(digits) < 2: continue
         a = digits[0]
         b = digits[-1]
         out = ""
