@@ -16,7 +16,6 @@ print(sum_of_values)
 
 calibration_values = []
 number_mapping = {
-            "zero": 0,
             "one": 1,
             "two": 2,
             "three": 3,
@@ -28,23 +27,37 @@ number_mapping = {
             "nine": 9
         }
 
+def process_line(line):
+    digits = re.findall(r"\d+|one|two|three|four|five|six|seven|eight|nine", line)
+    if len(digits) < 1:
+        return None
+    elif len(digits) < 2:
+        if len(digits[0]) > 1:
+            return int(str(digits[0][0]) + str(digits[0][-1]))
+        else:
+            return None
+
+    first_digit = digits[0]
+    last_digit = digits[-1]
+
+    if first_digit.isdigit():
+        first_digit = first_digit[0]
+    else:
+        first_digit = number_mapping[first_digit]
+
+    if last_digit.isdigit():
+        last_digit = last_digit[-1]
+    else:
+        last_digit = number_mapping[last_digit]
+
+    return int(str(first_digit) + str(last_digit))
+
 
 with open("day1.txt", "r") as file:
     for line in file:
-        digits = re.findall(r"\d+|zero|one|two|three|four|five|six|seven|eight|nine", line)
-        if len(digits) < 2: continue
-        a = digits[0]
-        b = digits[-1]
-        out = ""
-        if a.isdigit():
-            out += str(a[0])
-        else:
-            out += str(number_mapping[a])
-        if b.isdigit():
-            out += str(b[-1])
-        else:
-            out += str(number_mapping[b])
-        calibration_values.append(int(out))
+        out = process_line(line)
+        if out:
+            calibration_values.append(int(out))
         print(line, out)
 
 sum_of_values = sum(calibration_values)
